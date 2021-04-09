@@ -7,7 +7,7 @@
     "build": "tsc && node dist"
   },
   "dependencies": {
-    "config": "^3.3.6",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "gravatar": "^1.8.1",

@@ -1,7 +1,9 @@
 import express from "express";
 const app = express();
+import connectDB from "./Logger/db";
 
 // Connect Database
+connectDB();
 
 // Define Routes
 
