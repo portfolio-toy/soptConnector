@@ -5,7 +5,10 @@ import connectDB from "./Logger/db";
 // Connect Database
 connectDB();
 
+app.use(express.json()); //json타입을 사용할수 있게 설정.
+
 // Define Routes
+app.use("/api/users", require("./api/users"));
 
 // error handler
 app.use(function (err, req, res, next) {
