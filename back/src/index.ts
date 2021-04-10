@@ -1,4 +1,5 @@
 import express from "express";
+//express는 서버구축을 도와주는 칭구애요
 const app = express();
 import connectDB from "./Logger/db";
 

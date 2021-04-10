@@ -10,6 +10,7 @@ if (envFound.error) {
   throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
+// 에러가 없는 클린구역
 export default {
   /**
    * Your favorite port
@@ -19,6 +20,7 @@ export default {
   /**
    * That long string from mlab
    */
+  // mongoDB URI가 있는지?
   mongoURI: process.env.MONGODB_URI,
 
   /**
