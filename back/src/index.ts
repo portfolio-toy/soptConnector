@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-import connectDB from "./Logger/db";
+import connectDB from "./Logger/db"; //db에 붙여주는 것
 
 // Connect Database
 connectDB();
