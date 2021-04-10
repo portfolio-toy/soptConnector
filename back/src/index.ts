@@ -1,11 +1,15 @@
 import express from "express";
 const app = express();
-import connectDB from "./Logger/db";
+import connectDB from "./Logger/db"; // 데이터베이스와 연결하는 코드. 
 
 // Connect Database
 connectDB();
 
+app.use(express.json());
+
 // Define Routes
+app.use("/api/users", require("./api/users"));
+
 
 // error handler
 app.use(function (err, req, res, next) {
