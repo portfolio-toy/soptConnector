@@ -1,11 +1,16 @@
-import express from "express";
-const app = express();
-import connectDB from "./Logger/db";
+import express from "express"; //express: 서버의 구동을 도와주는 아이
+const app = express(); 
+import connectDB from "./Logger/db"; // 데이터베이스와 연결
 
 // Connect Database
 connectDB();
 
+// input을 json형태(객체형태)로 받는다!
+app.use(express.json());
+
 // Define Routes
+app.use("/api/users", require("./api/users"));
+// app.use("/api/profile", require("./api/profile"));
 
 // error handler
 app.use(function (err, req, res, next) {
