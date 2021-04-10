@@ -1,5 +1,5 @@
 import express from "express";
-const app = express();
+const app = express(); // 프레임 워크
 import connectDB from "./Logger/db";
 
 // Connect Database
