@@ -7,14 +7,13 @@ import { check, validationResult } from "express-validator";
 
 const router = express.Router();
 
-import User from '../models/User';
+import User from "../models/User";
 
 /**
  *  @route Post api/users
  *  @desc Register User
  *  @access Public
  */
-
 router.post(
   "/",
   [
