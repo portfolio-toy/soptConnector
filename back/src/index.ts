@@ -1,5 +1,8 @@
+// 서버 구축을 도와주는 프레임워크
 import express from "express";
 const app = express();
+
+// for db
 import connectDB from "./Logger/db";
 
 // Connect Database
