@@ -5,7 +5,11 @@ import connectDB from "./Logger/db"; //db에 붙여주는 것
 // Connect Database
 connectDB();
 
+app.use(express.json()); // 이름, 이메일, 비번을 json 객체 형태로 보내준다.
+
 // Define Routes
+app.use("/api/users", require("./api/users"));
+// app.use("/api/profile", require("./api/profile"));
 
 // error handler
 app.use(function (err, req, res, next) {
