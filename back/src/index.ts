@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; //서버 구축을 도와주는 것
 const app = express();
 import connectDB from "./Logger/db";
 

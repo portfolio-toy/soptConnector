@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 // Set the NODE_ENV to 'development' by default
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
-const envFound = dotenv.config();
+const envFound = dotenv.config(); //.env에 있는 파일 긁어옴
 if (envFound.error) {
   // This error should crash whole process
 
@@ -14,7 +14,7 @@ export default {
   /**
    * Your favorite port
    */
-  port: parseInt(process.env.PORT, 10),
+  port: parseInt(process.env.PORT, 10), //.env파일 가져온다
 
   /**
    * That long string from mlab
