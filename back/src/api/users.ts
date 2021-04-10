@@ -3,11 +3,9 @@ import gravatar from "gravatar";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config";
-
 import { check, validationResult } from "express-validator";
 const router = express.Router();
 import User from "../models/User";
-
 
 
 /**
