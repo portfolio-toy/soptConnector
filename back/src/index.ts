@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; // 서버 구축을 돕는 프레임워크
 const app = express();
 import connectDB from "./Logger/db";
 
@@ -6,6 +6,10 @@ import connectDB from "./Logger/db";
 connectDB();
 
 // Define Routes
+app.use(express.json()); // input 값을 json형태로 받는다.
+
+// Define Routes
+app.use("/api/users", require("./api/users"));
 
 // error handler
 app.use(function (err, req, res, next) {
