@@ -4,8 +4,9 @@ import connectDB from "./Logger/db";
 
 // Connect Database
 connectDB();
-
-// Define Routes
+app.use(express.json());
+// Define Routesy
+app.use("/api/users", require("./api/users"));
 
 // error handler
 app.use(function (err, req, res, next) {

@@ -10,12 +10,13 @@ if (envFound.error) {
   throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
+//에러 없는구역
 export default {
   /**
    * Your favorite port
    */
   port: parseInt(process.env.PORT, 10),
-
+//env의 정보를 가져온다
   /**
    * That long string from mlab
    */
