@@ -6,6 +6,7 @@ import { check, validationResult } from "express-validator";
 
 const router = express.Router();
 
+import auth from "../middleware/auth";
 import User from "../models/User";
 
 /**
@@ -64,5 +65,20 @@ router.post(
     }
   }
 );
+
+/*
+ *  @route GET api/auth
+ *  @desc Test Route
+ *  @access Public
+ */
+router.get("/", auth, async function (req, res) {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Err");
+  }
+});
 
 module.exports = router;
