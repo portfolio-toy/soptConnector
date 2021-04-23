@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config";
@@ -20,7 +20,7 @@ router.post(
     check("email", "Please include a valid email").isEmail(),
     check("password", "Password is required").exists(),
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -71,9 +71,9 @@ router.post(
  *  @desc Test Route
  *  @access Public
  */
-router.get("/", auth, async function (req, res) {
+router.get("/", auth, async function (req: Request, res: Response) {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.body.user.id).select("-password");
     res.json(user);
   } catch (err) {
     console.error(err.message);
