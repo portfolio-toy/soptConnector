@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-import connectDB from "./Logger/db";
+import connectDB from "./Loaders/db";
 
 // Connect Database
 connectDB();
