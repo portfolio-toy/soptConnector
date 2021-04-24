@@ -3,13 +3,14 @@ const app = express();
 import connectDB from "./Logger/db";
 
 
-
 // Connect Database
 connectDB();
 
 app.use(express.json());
 // Define Routes
 app.use("/api/users", require("./api/users"));
+app.use("/api/profile", require("./api/profile"));
+app.use("/api/auth", require("./api/auth"));
 
 // error handler
 app.use(function (err, req, res, next) {
