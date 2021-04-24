@@ -18,6 +18,8 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
+app.use("/api/profile", require("./api/profile"));
+
 app
   .listen(5000, () => {
     console.log(`

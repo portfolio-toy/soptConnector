@@ -7,12 +7,14 @@
     "build": "tsc && node dist"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.3"
+    "mongoose": "^5.12.3",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
