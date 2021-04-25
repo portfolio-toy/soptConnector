@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import gravatar from "gravatar";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config";
@@ -7,59 +6,42 @@ import { check, validationResult } from "express-validator";
 
 const router = express.Router();
 
+import auth from "../middleware/auth";
 import User from "../models/User";
 
 /**
- *  @route Post api/users
- *  @desc Register User
+ *  @route Post api/auth
+ *  @desc Authenticate user & get token(로그인)
  *  @access Public
  */
 router.post(
   "/",
   [
-    check("name", "Name is required").not().isEmpty(),
     check("email", "Please include a valid email").isEmail(),
-    check(
-      "password",
-      "Please enter a password with 6 or more characters"
-    ).isLength({ min: 6 }),
+    check("password", "Password is required").exists(),
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-      // See if  user exists
       let user = await User.findOne({ email });
 
-      if (user) {
+      if (!user) {
         res.status(400).json({
-          errors: [{ msg: "User already exists" }],
+          errors: [{ msg: "Invalid Credentials" }],
         });
       }
-
-      // Get users gravatar
-      const avatar = gravatar.url(email, {
-        s: "200",
-        r: "pq",
-        d: "mm",
-      });
-
-      user = new User({
-        name,
-        email,
-        avatar,
-        password,
-      });
-
       // Encrpyt password
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
-
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        res.status(400).json({
+          errors: [{ msg: "Invalid Credentials" }],
+        });
+      }
       await user.save();
 
       // Return jsonwebtoken
@@ -83,5 +65,20 @@ router.post(
     }
   }
 );
+
+/*
+ *  @route GET api/auth
+ *  @desc Test Route
+ *  @access Public
+ */
+router.get("/", auth, async function (req: Request, res: Response) {
+  try {
+    const user = await User.findById(req.body.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Err");
+  }
+});
 
 module.exports = router;
