@@ -34,3 +34,6 @@ app
     console.error(err);
     process.exit(1);
   });
+
+app.use("/api/profile", require("./api/profile"));
+app.use("/api/auth", require("./api/auth"));
