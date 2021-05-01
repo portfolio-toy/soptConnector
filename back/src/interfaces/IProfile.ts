@@ -29,6 +29,6 @@ export interface IProfileInputDTO {
   githubusername: string;
   experience: [IExperience];
   education: [IEducation];
-  social: [ISocial];
+  social: ISocial;
   date: Date;
 }
