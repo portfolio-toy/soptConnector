@@ -1,9 +1,9 @@
 import express from "express";
-import gravatar from "gravatar";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import gravatar from "gravatar"; // [1]
+import jwt from "jsonwebtoken"; // [2]
+import bcrypt from "bcryptjs"; // [3]
 import config from "../config";
-import { check, validationResult } from "express-validator";
+import { check, validationResult } from "express-validator"; // [4]
 
 const router = express.Router();
 
@@ -30,14 +30,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body; // [5]
 
-    try {
+    try { // [6]
       // See if  user exists
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ email }); // [7]
 
       if (user) {
-        res.status(400).json({
+        res.status(400).json({ // [8]
           errors: [{ msg: "User already exists" }],
         });
       }
