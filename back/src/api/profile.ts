@@ -251,6 +251,7 @@ router.put(
       to,
       current,
       description,
+      user,
     } = req.body;
 
     const newEdu = {
@@ -264,7 +265,7 @@ router.put(
     };
 
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await Profile.findOne({ user: user.id });
       profile.education.unshift(newEdu);
       await profile.save();
       res.json(profile);
