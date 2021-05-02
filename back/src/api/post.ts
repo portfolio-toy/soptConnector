@@ -5,6 +5,8 @@ import auth from "../middleware/auth";
 import User from "../models/User";
 import Post from "../models/Post";
 
+import IComment from "../interfaces/IComment";
+
 const router = Router();
 
 /**
@@ -183,7 +185,7 @@ router.post(
     try {
       const user = await User.findById(req.body.user.id).select("-password");
       const post = await Post.findById(req.params.id);
-      const newComment = {
+      const newComment: IComment = {
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
