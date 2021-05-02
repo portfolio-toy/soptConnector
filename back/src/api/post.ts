@@ -114,8 +114,6 @@ router.put("/like/:id", auth, async (req: Request, res: Response) => {
     if (!post) {
       return res.status(404).json({ msg: "Post not found" });
     }
-    post.likes.filter((like) => {
-      console.log(like);
     });
     if (
       post.likes.filter((like) => like.user.toString() === req.body.user.id)
