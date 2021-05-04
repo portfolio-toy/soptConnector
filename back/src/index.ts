@@ -4,12 +4,14 @@ import connectDB from "./Logger/db"; //데베에 붙여주는 것
 
 // Connect Database
 connectDB();
+app.use(express.json());
 
 // Define Routes
 
 
 app.use("/api/profile", require("./api/profile"));
-//app.use("/api/users", require("./api/users")); ->이거 나중에 주석 풀고 2차세미나 과제에서 코드 다 가져오기
+app.use("/api/users", require("./api/users"));
+app.use("/api/auth", require("./api/auth"));
 
 // error handler
 app.use(function (err, req, res, next) {
