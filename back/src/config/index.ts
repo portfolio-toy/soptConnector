@@ -10,7 +10,6 @@ if (envFound.error) {
   throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
-// 에러에 걸리지 않았을 때
 export default {
   /**
    * Your favorite port
@@ -27,4 +26,10 @@ export default {
    */
   jwtSecret: process.env.JWT_SECRET,
   jwtAlgorithm: process.env.JWT_ALGO,
+
+  /**
+   * Your secret sauce
+   */
+  githubClientId: process.env.GITHUB_CLIENT_ID,
+  githubSecret: process.env.GITHUB_SECRET,
 };
