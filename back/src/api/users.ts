@@ -7,7 +7,7 @@ import { check, validationResult }  from "express-validator";
 
 const router = express.Router();
 
-import User from "../models/Users"
+import User from "../models/User"
 
 /**
  * @route Post api/users
