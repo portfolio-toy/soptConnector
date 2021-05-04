@@ -27,8 +27,9 @@ export interface IProfileInputDto {
     skills?: [string];
     bio?: string;
     githubusername?: string;
+    social?: ISocial;
+    
     experience?: [IExperience];
     education?: [IEducation];
-    social?: [ISocial];
     date?: Date;
 }
