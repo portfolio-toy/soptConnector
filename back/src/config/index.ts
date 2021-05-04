@@ -10,6 +10,8 @@ if (envFound.error) {
   throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
+//if에 안걸린다면 에러 없는 깨끗한 구역
+
 export default {
   /**
    * Your favorite port
