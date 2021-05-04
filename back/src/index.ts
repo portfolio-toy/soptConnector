@@ -1,14 +1,20 @@
-import express from "express";
+import express from "express"; //서버 구축 도와주는 친구
 const app = express();
-import connectDB from "./Logger/db";
+import connectDB from "./Logger/db"; //데베에 붙여주는 것
 
 // Connect Database
 connectDB();
+app.use(express.json());
 
 app.use(express.json());
 
 // Define Routes
 app.use("/api/users", require("./api/users"));
+
+
+app.use("/api/profile", require("./api/profile"));
+app.use("/api/users", require("./api/users"));
+app.use("/api/auth", require("./api/auth"));
 
 // error handler
 app.use(function (err, req, res, next) {
