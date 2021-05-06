@@ -6,30 +6,30 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
   },
-  company: {
+  company: {  // 회사
     type: String,
     required: true,
   },
-  website: {
+  website: {  // 자신의 웹사이트
     type: String,
   },
-  location: {
+  location: { // 사는 지역
     type: String,
     required: true,
   },
-  status: {
+  status: { // 상태
     type: String,
   },
-  skills: {
-    type: [String],
+  skills: { // 기술 스택
+    type: [String], // 배열이라는 의미. skills 배열의 값으로 들어간다.
   },
-  bio: {
+  bio: {  // 자신의 설명
     type: String,
   },
-  githubusername: {
+  githubusername: { // 깃허브 아이디
     type: String,
   },
-  experience: [
+  experience: [ // 경력
     {
       title: {
         type: String,
@@ -43,23 +43,23 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      from: {
+      from: { // 언제부터
         type: Date,
         required: true,
       },
-      to: {
+      to: { // 언제까지
         type: Date,
       },
-      current: {
+      current: {  // 지금 일하는 직장인지?
         type: Boolean,
         default: false,
       },
-      description: {
-        type: String,
+      description: {  // 자신이 어떤 일을 하는지 설명
+        type: String
       },
     },
   ],
-  education: [
+  education: [  // 학력
     {
       school: {
         type: String,
