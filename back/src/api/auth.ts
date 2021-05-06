@@ -20,7 +20,58 @@ router.post(
     check("email", "Please include a valid email").isEmail(),
     check("password", "Password is required").exists(),
   ],
-  async (req: Request, res: Response) => {}
+  async (req: Request, res: Response) => {
+    // find error
+    console.log("api/auth")
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+      return res.status(400).json({errors : errors.array()});
+    }
+
+    const {email, password} = req.body;
+
+    try{
+      //find user
+      let user = await User.findOne({email});
+
+      if(!user){
+        res.status(400).json({
+          errors : [{msg : "Invalid Credentials"}],
+        });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if(!isMatch){
+        res.status(400).json({
+          errors: [ {msg : "Invalid Credentials"} ],
+        })
+      }
+
+      await user.save();
+
+      //Return jsonwebtoken
+      const payload = {
+        user:{
+          id: user.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        config.jwtSecret,
+        { expiresIn: 36000 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      )
+    }catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+
+    }
+
+  }
 );
 
 /*
@@ -28,6 +79,16 @@ router.post(
  *  @desc Test Route
  *  @access Public
  */
-router.get("/", auth, async function (req: Request, res: Response) {});
+router.get("/", auth, async function (req: Request, res: Response) {
+  try{
+    console.log(req.body.user.id);
+    const user = await (await User.findById(req.body.user.id)).isSelected("-password");
+    res.json(user);
+  }catch (err){
+    console.error(err.message);
+    res.status(500).send("Server Err");
+  }
+
+});
 
 module.exports = router;

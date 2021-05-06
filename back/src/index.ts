@@ -4,7 +4,6 @@ import connectDB from "./Logger/db";
 
 // Connect Database
 connectDB();
-
 app.use(express.json());
 
 // Define Routes

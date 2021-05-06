@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 import { IUser } from "../interfaces/IUser";
 
+const TestShchema = new mongoose.Schema({
+  name : {
+    type: String,
+    required: true,
+    unique: true,
+  },
+})
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
