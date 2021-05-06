@@ -14,13 +14,64 @@ import User from "../models/User";
  *  @desc Authenticate user & get token(로그인)
  *  @access Public
  */
+
+//로그인 
 router.post(
   "/",
   [
     check("email", "Please include a valid email").isEmail(),
     check("password", "Password is required").exists(),
   ],
-  async (req: Request, res: Response) => {}
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+      return res.status(400).json({errors: errors.array()});
+    }
+
+    const {email, password} = req.body;
+
+    try{
+      let user = await User.findOne({email});
+
+      if(!user){
+        res.status(400).json({
+          errors:[{msg: "Invalid Credentials"}],
+        });
+      }
+
+      const isMatch = await bcrypt.compare(password,user.password);
+      if(!isMatch){
+        res.status(400).json({
+          errors: [{msg: "Invalid Credentials"}],
+        });
+      }
+
+      //await user.save();  //왜 하는거지 ?
+
+      //jwt payload부분 
+      const payload = {
+        user:{
+          id: user.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        config.jwtSecret,
+        {expiresIn: 36000},
+        (err, token) => {
+        if(err) throw err;
+        res.json({token});
+        }
+      );
+
+    }catch(err){
+      res.status(500).send("Server Error");
+    }
+
+
+  }
 );
 
 /*
@@ -28,6 +79,18 @@ router.post(
  *  @desc Test Route
  *  @access Public
  */
-router.get("/", auth, async function (req: Request, res: Response) {});
+
+//토큰 확인 미들웨어 테스트 
+router.get("/", auth, async (req: Request, res: Response) => {
+  try{
+    console.log(req.body.user);
+    const user = await User.findById(req.body.user.id).select("-password");
+    res.json(user);
+  }catch(err){
+    console.error(err.message);
+    res.status(500).send("Server Err");
+  }
+
+});
 
 module.exports = router;
