@@ -26,4 +26,10 @@ export default {
    */
   jwtSecret: process.env.JWT_SECRET,
   jwtAlgorithm: process.env.JWT_ALGO,
+
+  /**
+   * Your secret sauce
+   */
+   githubCliendId: process.env.GITHUB_CLIENT_ID,
+   githubSecret: process.env.GITHUB_SECRET,
 };
