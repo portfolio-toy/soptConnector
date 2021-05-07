@@ -16,7 +16,7 @@ const router = Router();
  */
 router.get("/", async (req: Request, res: Response) => {
   try{
-    // populate == join, Profile 의 User는 id로, name, avatar는 User에 들어가있음.
+    // populate == join, profile정보뿐만 아니라 user(도큐먼트)에 있는 Name과 avatar정보도 같이 find
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     res.json(profiles);
   }catch(err){
