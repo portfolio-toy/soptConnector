@@ -14,7 +14,15 @@ const router = Router();
  *  @desc Get all profiles
  *  @access Public
  */
-router.get("/", async (req: Request, res: Response) => {});
+ router.get("/", async (req: Request, res: Response) => {
+  try{
+    const profiles = await Profile.find().populate("user",["name", "avatar"]);
+    res.json(profiles);
+  }catch(error){
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 /**
  *  @route GET api/profile/user/:user_id
