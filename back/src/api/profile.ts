@@ -14,7 +14,18 @@ const router = Router();
  *  @desc Get all profiles
  *  @access Public
  */
-router.get("/", async (req: Request, res: Response) => {});
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const profiles = Profile.find().populate("user", ["user", "avatar"]);
+    if (!profiles) {
+      res.status(400).json({ msg: "There is no profiles" });
+    }
+    res.json(profiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 /**
  *  @route GET api/profile/user/:user_id
