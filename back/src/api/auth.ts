@@ -71,6 +71,15 @@ router.post(
  *  @desc Test Route
  *  @access Public
  */
-router.get("/", auth, async function (req: Request, res: Response) {});
+router.get("/", auth, async function (req: Request, res: Response) {
+    try {
+        console.log(req.body.user.id);
+        const user = await User.findById(req.body.user.id).select("-password");
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
 
 module.exports = router;
