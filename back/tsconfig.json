@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["es2017", "esnext.asynciterable"],
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "target": "es6",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -14,7 +12,8 @@
     "outDir": "./build",
     "allowJs": true,
     "noEmit": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": ["./src/types/express.d.ts", "./node_modules/@types"]
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "tests"]
