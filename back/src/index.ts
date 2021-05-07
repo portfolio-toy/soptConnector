@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 const app = express();
 import connectDB from "./Logger/db";
 

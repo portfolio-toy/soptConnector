@@ -1,9 +1,9 @@
+
 import express, { Request, Response } from "express";
 import gravatar from "gravatar";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config";
-
 // check 함수를 통해 request body 의 값을 검사해준다.
 import { check, validationResult } from "express-validator";
 
