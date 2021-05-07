@@ -5,7 +5,7 @@ import Profile from "../models/Profile";
 import config from "../config";
 import auth from "../middlewares/auth";
 import { check, validationResult } from "express-validator";
-import { IProfileInputDTO } from "../interface/IProfile";
+import { IProfileInputDTO } from "../interfaces/IProfile";
 
 /**
  *  @route GET api/profile
