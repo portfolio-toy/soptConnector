@@ -16,7 +16,7 @@ const router = Router();
  */
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const profiles = Profile.find().populate("user", ["user", "avatar"]);
+    const profiles = await Profile.find().populate("user", ["user", "avatar"]);
     if (!profiles) {
       res.status(400).json({ msg: "There is no profiles" });
     }
@@ -32,7 +32,23 @@ router.get("/", async (req: Request, res: Response) => {
  *  @desc Get profile by user ID
  *  @access Public
  */
-router.get("/user/:user_id", async (req: Request, res: Response) => {});
+router.get("/user/:user_id", async (req: Request, res: Response) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate("user", ["user", "avatar"]);
+    if (!profile) {
+      res.status(400).json({ msg: "Profile not found" });
+    }
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      res.status(400).json({ msg: "Profile not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
 
 /**
  *  @route GET api/profile/github/:username
