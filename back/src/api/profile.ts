@@ -188,7 +188,42 @@ router.put(
     check("company", "Company is required").not().isEmpty(),
     check("from", "From data is required").not().isEmpty(),
   ],
-  async (req: Request, res: Response) => {}
+  async (req: Request, res: Response) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(400).json({ error: error.array() });
+    }
+
+    const {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
+    } = req.body;
+
+    const newExp = {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
+    };
+
+    try {
+      const profile = await Profile.findOne({ user: req.body.user.id });
+      profile.experience.unshift(newExp);
+      await profile.save()
+      res.json(profile);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server Error");
+    }
+  }
 );
 
 /**
