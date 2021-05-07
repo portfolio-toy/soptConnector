@@ -111,7 +111,68 @@ router.post(
     check("status", "Status is required").not().isEmpty(),
     check("skills", "Skills is required").not().isEmpty(),
   ],
-  async (req: Request, res: Response) => {}
+  async (req: Request, res: Response) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(400).json({ error: error.array() });
+    }
+
+    const {
+      company,
+      website,
+      location,
+      bio,
+      status,
+      githubusername,
+      skills,
+      youtube,
+      facebook,
+      twitter,
+      linkedin,
+      instagram,
+      user,
+    } = req.body
+
+    let profileFields: IProfileInputDTO = {
+      user: user.id,
+    };
+    if (company) profileFields.company = company;
+    if (website) profileFields.website = website;
+    if (location) profileFields.location = location;
+    if (bio) profileFields.bio = bio;
+    if (status) profileFields.status = status;
+    if (githubusername) profileFields.githubusername = githubusername;
+    if (skills) {
+      profileFields.skills = skills.split(",").map((skill) => skill.trim());
+    }
+
+    if (youtube) profileFields.social.youtube = youtube;
+    if (facebook) profileFields.social.facebook = facebook;
+    if (twitter) profileFields.social.twitter = twitter;
+    if (linkedin) profileFields.social.linkedin = linkedin;
+    if (instagram) profileFields.social.instagram = instagram;
+
+    try {
+      let profile = await Profile.findOne({ user: user.id });
+
+      if (profile) {
+        profile = await Profile.findByIdAndUpdate(
+          { user: user.id },
+          { $set: { value: profileFields } },
+          { new: true },
+        );
+
+        return res.json(profile);
+      }
+
+      profile = new Profile(profileFields);
+      await profile.save()
+      res.json(profile);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server Error");
+    }
+  }
 );
 
 /**
