@@ -38,13 +38,13 @@ router.get("/user/:user_id", async (req: Request, res: Response) => {
       user: req.params.user_id,
     }).populate("user", ["user", "avatar"]);
     if (!profile) {
-      res.status(400).json({ msg: "Profile not found" });
+      return res.status(400).json({ msg: "Profile not found" });
     }
     res.json(profile);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {
-      res.status(400).json({ msg: "Profile not found" });
+      return res.status(400).json({ msg: "Profile not found" });
     }
     res.status(500).send("Server Error");
   }
@@ -62,7 +62,21 @@ router.get("/github/:username", (req: Request, res: Response) => {});
  *  @desc Get current users profile
  *  @access Private
  */
-router.get("/me", auth, async (req: Request, res: Response) => {});
+router.get("/me", auth, async (req: Request, res: Response) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.body.user.id,
+    }).populate("user", ["user", "avatar"]);
+
+    if (!profile) {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 /**
  *  @route POST api/profile
