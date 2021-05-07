@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IProfile } from "../interface/IProfile";
+import { IProfile } from "../interfaces/IProfile";
 
 const ProfileSchema = new mongoose.Schema({
   user: {
