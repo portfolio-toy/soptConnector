@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "node:os";
 import { IUser } from "../interfaces/IUser";
 
 const UserSchema = new mongoose.Schema({
