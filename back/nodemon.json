@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "watch": [
       "src",
       ".env"
@@ -9,3 +10,15 @@
     ],
     "exec": "ts-node  --transpile-only ./src/index.ts"
   }
+=======
+  "watch": [
+    "src",
+    ".env"
+  ],
+  "ext": "js,ts,json",
+  "ignore": [
+    "src/**/*.spec.ts"
+  ],
+  "exec": "ts-node  --transpile-only ./src/index.ts"
+}
+>>>>>>> 461ab6ebade6d66f779922733fe90a096638a510

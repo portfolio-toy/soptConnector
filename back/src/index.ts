@@ -5,7 +5,10 @@ import connectDB from "./Logger/db";
 // Connect Database
 connectDB();
 
+<<<<<<< HEAD
 // 이 코드가 업스면 json 인식을 못해..
+=======
+>>>>>>> 461ab6ebade6d66f779922733fe90a096638a510
 app.use(express.json());
 
 // Define Routes

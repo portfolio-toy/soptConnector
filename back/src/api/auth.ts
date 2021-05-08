@@ -1,12 +1,23 @@
+<<<<<<< HEAD
 import express from "express";
+=======
+import express, { Request, Response } from "express";
+>>>>>>> 461ab6ebade6d66f779922733fe90a096638a510
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config";
 import { check, validationResult } from "express-validator";
+<<<<<<< HEAD
 import auth from "../middleware/auth";
 
 const router = express.Router();
 
+=======
+
+const router = express.Router();
+
+import auth from "../middleware/auth";
+>>>>>>> 461ab6ebade6d66f779922733fe90a096638a510
 import User from "../models/User";
 
 /**
@@ -20,6 +31,7 @@ router.post(
     check("email", "Please include a valid email").isEmail(),
     check("password", "Password is required").exists(),
   ],
+<<<<<<< HEAD
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -68,11 +80,17 @@ router.post(
 
 module.exports = router;
 
+=======
+  async (req: Request, res: Response) => {}
+);
+
+>>>>>>> 461ab6ebade6d66f779922733fe90a096638a510
 /*
  *  @route GET api/auth
  *  @desc Test Route
  *  @access Public
  */
+<<<<<<< HEAD
 router.get("/", auth, async function (req, res) {
     try {
       console.log(req.body.user.id);
@@ -84,3 +102,8 @@ router.get("/", auth, async function (req, res) {
     }
   });
   
+=======
+router.get("/", auth, async function (req: Request, res: Response) {});
+
+module.exports = router;
+>>>>>>> 461ab6ebade6d66f779922733fe90a096638a510

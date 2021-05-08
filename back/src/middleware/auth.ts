@@ -19,4 +19,8 @@ export default (req, res, next) => {
   } catch (err) {
     res.status(401).json({ msg: "Token is not valid" });
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 461ab6ebade6d66f779922733fe90a096638a510
