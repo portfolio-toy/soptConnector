@@ -152,11 +152,11 @@ router.post(
   
       // Build social object
   
-      if (youtube) profileFields.social[0].youtube = youtube;
-      if (facebook) profileFields.social[0].facebook = facebook;
-      if (twitter) profileFields.social[0].twitter = twitter;
-      if (linkedin) profileFields.social[0].linkedin = linkedin;
-      if (instagram) profileFields.social[0].instagram = instagram;
+      if (youtube) profileFields.social.youtube = youtube;
+      if (facebook) profileFields.social.facebook = facebook;
+      if (twitter) profileFields.social.twitter = twitter;
+      if (linkedin) profileFields.social.linkedin = linkedin;
+      if (instagram) profileFields.social.instagram = instagram;
   
       try {
         let profile = await Profile.findOne({ user: user.id });
