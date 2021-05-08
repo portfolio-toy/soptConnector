@@ -5,7 +5,7 @@ import config from "../config";
 import request from 'request'
 import {Request, Response} from "express";
 import { check, validationResult } from "express-validator";
-import { IProfileInputDTO } from "../interfaces/IprofileInputDTO";
+import { IProfileInputDTO } from "../interfaces/IProfileInputDTO";
 // 안되면 소문자 탓
 import auth from "../middleware/auth";
 
