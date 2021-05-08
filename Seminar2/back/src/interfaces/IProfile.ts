@@ -14,7 +14,7 @@ export interface IProfile {
   githubusername: string;
   experience: [IExperience];
   education: [IEducation];
-  social: [ISocial];
+  social: [ISocial]; // object 형태일 수 있으니 알아보자 
   date: Date;
 }
 
@@ -29,6 +29,6 @@ export interface IProfileInputDTO {
   githubusername: string;
   experience: [IExperience];
   education: [IEducation];
-  social: [ISocial];
+  social: ISocial; // object 형태일 수 있으니 알아보자
   date: Date;
 }
