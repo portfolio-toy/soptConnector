@@ -6,10 +6,10 @@ export interface ISocial{
     instagram: string;
 }
 
-// export interface ISocialInputDTO {
-//     youtube: String;
-//     twitter: String;
-//     facebook: String;
-//     linkedin: String;
-//     instagram: String;
-//   }
+export interface ISocialInputDTO {
+    youtube: String;
+    twitter: String;
+    facebook: String;
+    linkedin: String;
+    instagram: String;
+  }
