@@ -20,20 +20,6 @@ export interface IProfile {
 
 export interface IProfileInputDTO {
   user: mongoose.Types.ObjectId;
-<<<<<<< HEAD
-  company: string;
-  website: string;
-  location: string;
-  status: string;
-  skills: [string];
-  bio: string;
-  githubusername: string;
-  experience: [IExperience];
-  education: [IEducation];
-  social: [ISocial];
-  date: Date;
-}
-=======
   company?: string;
   website?: string;
   location?: string;
@@ -45,4 +31,3 @@ export interface IProfileInputDTO {
   education?: [IEducation];
   social?: ISocial;
 }
->>>>>>> 461ab6ebade6d66f779922733fe90a096638a510
