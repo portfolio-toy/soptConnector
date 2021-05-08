@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken";
 import config from "../config";
-import auth from "../middleware/auth";
-
 
 export default (req, res, next) => {
   // Get token from header

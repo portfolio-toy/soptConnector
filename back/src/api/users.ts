@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import gravatar from "gravatar";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
@@ -24,7 +24,7 @@ router.post(
       "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 }),
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
