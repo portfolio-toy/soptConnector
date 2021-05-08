@@ -6,9 +6,18 @@ import connectDB from "./Logger/db";
 connectDB();
 
 app.use(express.json());
+<<<<<<< HEAD
 // Define Routes
 app.use("/api/users", require("./api/users"));
 app.use("/api/profile", require("./api/profile"));
+=======
+
+// Define Routes
+app.use("/api/users", require("./api/users"));
+app.use("/api/profile", require("./api/profile"));
+app.use("/api/posts", require("./api/post"));
+app.use("/api/auth", require("./api/auth"));
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
 
 // error handler
 app.use(function (err, req, res, next) {

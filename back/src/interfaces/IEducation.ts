@@ -16,4 +16,8 @@ export interface IEducationInputDTO {
   to: Date;
   current: boolean;
   description: string;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf

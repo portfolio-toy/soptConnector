@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express, {Request, Response} from "express";
 import { check, validationResult } from "express-validator";
 import request from 'request';
@@ -13,25 +14,57 @@ const router = express.Router();
  * @access Public
  */
 router.get("/", async (req, res) => {
+=======
+import { Router, Request, Response } from "express";
+import request from "request";
+import { check, validationResult } from "express-validator";
+import config from "../config";
+
+import auth from "../middleware/auth";
+import Profile from "../models/Profile";
+import { IProfileInputDTO } from "../interfaces/IProfile";
+
+const router = Router();
+
+/**
+ *  @route GET api/profile
+ *  @desc Get all profiles
+ *  @access Public
+ */
+router.get("/", async (req: Request, res: Response) => {
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
   try {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     res.json(profiles);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
+<<<<<<< HEAD
     }
 });
+=======
+  }
+});
+
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
 /**
  *  @route GET api/profile/user/:user_id
  *  @desc Get profile by user ID
  *  @access Public
  */
+<<<<<<< HEAD
 router.get("/user/:user_id", async (req, res) => {
+=======
+router.get("/user/:user_id", async (req: Request, res: Response) => {
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id,
     }).populate("user", ["name", "avatar"]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
     if (!profile) return res.status(400).json({ msg: "Profile not found" });
     res.json(profile);
   } catch (error) {
@@ -42,12 +75,20 @@ router.get("/user/:user_id", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
 /**
  *  @route GET api/profile/github/:username
  *  @desc Get user repos from github
  *  @access Public
  */
+<<<<<<< HEAD
 router.get("/github/:username", (req, res) => {
+=======
+router.get("/github/:username", (req: Request, res: Response) => {
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
   try {
     const options = {
       uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.githubClientId}&client_secret=${config.githubSecret}`,
@@ -69,12 +110,20 @@ router.get("/github/:username", (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
 /**
  *  @route GET api/profile/me
  *  @desc Get current users profile
  *  @access Private
  */
+<<<<<<< HEAD
 router.get("/me", auth, async (req, res) => {
+=======
+router.get("/me", auth, async (req: Request, res: Response) => {
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
   try {
     const profile = await Profile.findOne({
       user: req.body.user.id,
@@ -176,7 +225,10 @@ router.post(
  *  @desc Add profile experience
  *  @access Private
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
 router.put(
   "/experience",
   auth,
@@ -221,6 +273,10 @@ router.put(
     }
   }
 );
+<<<<<<< HEAD
+=======
+
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
 /**
  *  @route PUT api/profile/education
  *  @desc Add profile education
@@ -247,6 +303,10 @@ router.put(
       to,
       current,
       description,
+<<<<<<< HEAD
+=======
+      user,
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
     } = req.body;
 
     const newEdu = {
@@ -260,7 +320,11 @@ router.put(
     };
 
     try {
+<<<<<<< HEAD
       const profile = await Profile.findOne({ user: req.body.user.id }); //만약 오류나면 body 지우기
+=======
+      const profile = await Profile.findOne({ user: user.id });
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
       profile.education.unshift(newEdu);
       await profile.save();
       res.json(profile);
@@ -270,5 +334,9 @@ router.put(
     }
   }
 );
+<<<<<<< HEAD
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf

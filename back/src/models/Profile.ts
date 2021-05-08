@@ -116,4 +116,8 @@ const ProfileSchema = new mongoose.Schema({
 export default mongoose.model<IProfile & mongoose.Document>(
   "Profile",
   ProfileSchema
+<<<<<<< HEAD
 );
+=======
+);
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf

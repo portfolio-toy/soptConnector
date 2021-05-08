@@ -52,4 +52,8 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
+<<<<<<< HEAD
 export default mongoose.model<IPost & mongoose.Document>("Post", PostSchema);
+=======
+export default mongoose.model<IPost & mongoose.Document>("Post", PostSchema);
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf

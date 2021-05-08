@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import express from "express";
+=======
+import express, { Request, Response } from "express";
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
 import gravatar from "gravatar";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
@@ -24,7 +28,11 @@ router.post(
       "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 }),
   ],
+<<<<<<< HEAD
   async (req, res) => {
+=======
+  async (req: Request, res: Response) => {
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -49,6 +57,16 @@ router.post(
         d: "mm",
       });
 
+<<<<<<< HEAD
+=======
+      user = new User({
+        name,
+        email,
+        avatar,
+        password,
+      });
+
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
       // Encrpyt password
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
@@ -77,4 +95,8 @@ router.post(
   }
 );
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf

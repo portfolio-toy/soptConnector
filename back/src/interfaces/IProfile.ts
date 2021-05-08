@@ -30,4 +30,8 @@ export interface IProfileInputDTO {
   experience?: [IExperience];
   education?: [IEducation];
   social?: ISocial;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 130812cb7753b7d3d63745d99110c8847a50f7cf
