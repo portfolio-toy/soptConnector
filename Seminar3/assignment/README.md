@@ -33,7 +33,7 @@
 |               과제 설명             |                과제                 |           
 | :-------------------------------: | :-------------------------------: |
 | 1. 복습  | [☝🏻]()    | 
-| 2. Post 데이터 설계해보기  | [☝🏻]()    | 
+| 2. Post 데이터 설계해보기  | [✌🏻](https://github.com/portfolio-toy/soptConnector/blob/develop/parksangsu/Seminar3/back/src/models/Post.ts)    | 
 
 
 </div>
