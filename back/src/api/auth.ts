@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config";
@@ -8,23 +8,6 @@ const router = express.Router();
 
 import auth from "../middlewares/auth";
 import User from "../models/User";
-
-
-/*
- *  @route GET api/auth
- *  @desc Test Route
- *  @access Public
- */
-router.get("/", auth, async function (req, res) {
-  try {
-    console.log(req.body.user);
-    const user = await User.findById(req.body.user.id).select("-password");
-    res.json(user);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Err");
-  }
-});
 
 /**
  *  @route Post api/auth
@@ -37,7 +20,7 @@ router.post(
     check("email", "Please include a valid email").isEmail(),
     check("password", "Password is required").exists(),
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -83,5 +66,19 @@ router.post(
   }
 );
 
+/*
+ *  @route GET api/auth
+ *  @desc Test Route
+ *  @access Public
+ */
+router.get("/", auth, async function (req: Request, res: Response) {
+  try {
+    const user = await User.findById(req.body.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Err");
+  }
+});
 
 module.exports = router;

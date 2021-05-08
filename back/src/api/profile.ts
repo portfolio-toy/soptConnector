@@ -1,20 +1,20 @@
-import express, {Request, Response} from "express";
-
+import { Router, Request, Response } from "express";
 import request from "request";
-import Profile from "../models/Profile";
-import config from "../config";
-import auth from "../middlewares/auth";
 import { check, validationResult } from "express-validator";
+import config from "../config";
+
+import auth from "../middlewares/auth";
+import Profile from "../models/Profile";
 import { IProfileInputDTO } from "../interfaces/IProfile";
 
-const router = express.Router();
+const router = Router();
 
 /**
  *  @route GET api/profile
  *  @desc Get all profiles
  *  @access Public
  */
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     res.json(profiles);
@@ -29,30 +29,28 @@ router.get("/", async (req, res) => {
  *  @desc Get profile by user ID
  *  @access Public
  */
-
- router.get("/user/:user_id", async (req, res) => {
-    try {
-      const profile = await Profile.findOne({
-        user: req.params.user_id,
-      }).populate("user", ["name", "avatar"]);
-  
-      if (!profile) return res.status(400).json({ msg: "Profile not found" });
-      res.json(profile);
-    } catch (error) {
-      console.error(error.message);
-      if (error.kind == "ObjectId") {
-        return res.status(400).json({ msg: "Profile not found" });
-      }
-      res.status(500).send("Server Error");
+router.get("/user/:user_id", async (req: Request, res: Response) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate("user", ["name", "avatar"]);
+    if (!profile) return res.status(400).json({ msg: "Profile not found" });
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
     }
-  });
+    res.status(500).send("Server Error");
+  }
+});
 
 /**
  *  @route GET api/profile/github/:username
  *  @desc Get user repos from github
  *  @access Public
  */
-router.get("/github/:username", (req, res) => {
+router.get("/github/:username", (req: Request, res: Response) => {
   try {
     const options = {
       uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.githubClientId}&client_secret=${config.githubSecret}`,
@@ -74,12 +72,13 @@ router.get("/github/:username", (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
 /**
  *  @route GET api/profile/me
  *  @desc Get current users profile
  *  @access Private
  */
-router.get("/me", auth, async (req, res) => {
+router.get("/me", auth, async (req: Request, res: Response) => {
   try {
     const profile = await Profile.findOne({
       user: req.body.user.id,
@@ -181,8 +180,7 @@ router.post(
  *  @desc Add profile experience
  *  @access Private
  */
-
- router.put(
+router.put(
   "/experience",
   auth,
   [
@@ -232,7 +230,7 @@ router.post(
  *  @desc Add profile education
  *  @access Private
  */
- router.put(
+router.put(
   "/education",
   auth,
   [
@@ -253,6 +251,7 @@ router.post(
       to,
       current,
       description,
+      user,
     } = req.body;
 
     const newEdu = {
@@ -266,7 +265,7 @@ router.post(
     };
 
     try {
-      const profile = await Profile.findOne({ user: req.body.user.id });
+      const profile = await Profile.findOne({ user: user.id });
       profile.education.unshift(newEdu);
       await profile.save();
       res.json(profile);
@@ -276,5 +275,4 @@ router.post(
     }
   }
 );
-
 module.exports = router;
