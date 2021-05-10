@@ -16,6 +16,7 @@ const router = express.Router();
  */
 router.get("/", async (req, res) => {
   try {
+    // profile을 가져올 건데 user, [name, avatar]를 가져온거야!
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     res.json(profiles);
   } catch (error) {
@@ -218,6 +219,7 @@ router.put(
 
     try {
       const profile = await Profile.findOne({ user: req.body.user.id });
+      // unshift는 앞에서 넣어줌 새로운 요소를 배열의 맨 앞에 넣어줌
       profile.experience.unshift(newExp);
       await profile.save();
       res.json(profile);
@@ -267,7 +269,7 @@ router.put(
     };
 
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await Profile.findOne({ user: req.body.user.id });
       profile.education.unshift(newEdu);
       await profile.save();
       res.json(profile);
