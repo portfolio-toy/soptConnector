@@ -8,7 +8,7 @@ import {check, validationResult} from "express-validator";
 const router = express.Router();
 
 import User from "../models/User";
-import { access } from "node:fs";
+// import { access } from "node:fs";
 
 /** 
  * @route Post api/Users
