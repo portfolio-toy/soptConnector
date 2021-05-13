@@ -1,0 +1,232 @@
+{
+    "name": "@types/mongoose",
+    "version": "5.10.5",
+    "description": "TypeScript definitions for Mongoose",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "horiuchi",
+            "url": "https://github.com/horiuchi",
+            "githubUsername": "horiuchi"
+        },
+        {
+            "name": "lukasz-zak",
+            "url": "https://github.com/lukasz-zak",
+            "githubUsername": "lukasz-zak"
+        },
+        {
+            "name": "jendrikw",
+            "url": "https://github.com/jendrikw",
+            "githubUsername": "jendrikw"
+        },
+        {
+            "name": "Ethan Resnick",
+            "url": "https://github.com/ethanresnick",
+            "githubUsername": "ethanresnick"
+        },
+        {
+            "name": "vologa",
+            "url": "https://github.com/vologab",
+            "githubUsername": "vologab"
+        },
+        {
+            "name": "jussikinnula",
+            "url": "https://github.com/jussikinnula",
+            "githubUsername": "jussikinnula"
+        },
+        {
+            "name": "ondratra",
+            "url": "https://github.com/ondratra",
+            "githubUsername": "ondratra"
+        },
+        {
+            "name": "alfirin",
+            "url": "https://github.com/alfirin",
+            "githubUsername": "alfirin"
+        },
+        {
+            "name": "Idan Dardikman",
+            "url": "https://github.com/idandrd",
+            "githubUsername": "idandrd"
+        },
+        {
+            "name": "Dominik Heigl",
+            "url": "https://github.com/various89",
+            "githubUsername": "various89"
+        },
+        {
+            "name": "Fazendaaa",
+            "url": "https://github.com/Fazendaaa",
+            "githubUsername": "Fazendaaa"
+        },
+        {
+            "name": "Norman Perrin",
+            "url": "https://github.com/NormanPerrin",
+            "githubUsername": "NormanPerrin"
+        },
+        {
+            "name": "stablio",
+            "url": "https://github.com/stablio",
+            "githubUsername": "stablio"
+        },
+        {
+            "name": "Emmanuel Gautier",
+            "url": "https://github.com/emmanuelgautier",
+            "githubUsername": "emmanuelgautier"
+        },
+        {
+            "name": "Frontend Monster",
+            "url": "https://github.com/frontendmonster",
+            "githubUsername": "frontendmonster"
+        },
+        {
+            "name": "Ming Chen",
+            "url": "https://github.com/mingchen",
+            "githubUsername": "mingchen"
+        },
+        {
+            "name": "Olga Isakova",
+            "url": "https://github.com/penumbra1",
+            "githubUsername": "penumbra1"
+        },
+        {
+            "name": "HughKu",
+            "url": "https://github.com/HughKu",
+            "githubUsername": "HughKu"
+        },
+        {
+            "name": "Erik Lopez",
+            "url": "https://github.com/niuware",
+            "githubUsername": "niuware"
+        },
+        {
+            "name": "Vlad Melnik",
+            "url": "https://github.com/vladmel1234",
+            "githubUsername": "vladmel1234"
+        },
+        {
+            "name": "Jarom Loveridge",
+            "url": "https://github.com/jloveridge",
+            "githubUsername": "jloveridge"
+        },
+        {
+            "name": "Grimmer Kang",
+            "url": "https://github.com/grimmer0125",
+            "githubUsername": "grimmer0125"
+        },
+        {
+            "name": "Richard Davison",
+            "url": "https://github.com/richarddd",
+            "githubUsername": "richarddd"
+        },
+        {
+            "name": "Brian Chen",
+            "url": "https://github.com/ToucheSir",
+            "githubUsername": "ToucheSir"
+        },
+        {
+            "name": "Boris Figovsky",
+            "url": "https://github.com/borfig",
+            "githubUsername": "borfig"
+        },
+        {
+            "name": "Simon Driscoll",
+            "url": "https://github.com/dinodeSimon",
+            "githubUsername": "dinodeSimon"
+        },
+        {
+            "name": "Anton Kenikh",
+            "url": "https://github.com/anthony-kenikh",
+            "githubUsername": "anthony-kenikh"
+        },
+        {
+            "name": "Chathu Vishwajith",
+            "url": "https://github.com/iamchathu",
+            "githubUsername": "iamchathu"
+        },
+        {
+            "name": "LKHO",
+            "url": "https://github.com/lkho",
+            "githubUsername": "lkho"
+        },
+        {
+            "name": "Tom Yam",
+            "url": "https://github.com/tomyam1",
+            "githubUsername": "tomyam1"
+        },
+        {
+            "name": "Thomas Pischulski",
+            "url": "https://github.com/nephix",
+            "githubUsername": "nephix"
+        },
+        {
+            "name": "Sam Kim",
+            "url": "https://github.com/rlaace423",
+            "githubUsername": "rlaace423"
+        },
+        {
+            "name": "Dongjun Lee",
+            "url": "https://github.com/ChazEpps",
+            "githubUsername": "ChazEpps"
+        },
+        {
+            "name": "Jan Nemcik",
+            "url": "https://github.com/JanNemcik",
+            "githubUsername": "JanNemcik"
+        },
+        {
+            "name": "Cl3dson",
+            "url": "https://github.com/cl3dson",
+            "githubUsername": "cl3dson"
+        },
+        {
+            "name": "Richard Simko",
+            "url": "https://github.com/richardsimko",
+            "githubUsername": "richardsimko"
+        },
+        {
+            "name": "Marek Tuchalski",
+            "url": "https://github.com/ith",
+            "githubUsername": "ith"
+        },
+        {
+            "name": "Jeremy Bensimon",
+            "url": "https://github.com/jeremyben",
+            "githubUsername": "jeremyben"
+        },
+        {
+            "name": "Andrei Alecu",
+            "url": "https://github.com/andreialecu",
+            "githubUsername": "andreialecu"
+        },
+        {
+            "name": "The Half Blood Prince",
+            "url": "https://github.com/tHBp",
+            "githubUsername": "tHBp"
+        },
+        {
+            "name": "Pirasis Leelatanon",
+            "url": "https://github.com/1pete",
+            "githubUsername": "1pete"
+        },
+        {
+            "name": "Guillem Gelabert Sunyer",
+            "url": "https://github.com/guillem-gelabert",
+            "githubUsername": "guillem-gelabert"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/mongoose"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/mongodb": "*",
+        "@types/node": "*"
+    },
+    "typesPublisherContentHash": "b9a604917cafdcf4980ee08711c46513bd8ab4af6d529623920fc7f08af00131",
+    "typeScriptVersion": "3.5"
+}
