@@ -43,6 +43,7 @@ router.post(
             }
 
             // Get users gravatar
+            // gravatar 라이브러리
             const avatar = gravatar.url(email, {
                 s: "200",
                 r: "pq",

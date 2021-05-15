@@ -59,6 +59,7 @@ router.post(
                     errors: [{ msg: "Invalid Credentials" }],
                 });
             }
+            // 왜 해주는 거죠?? 몽고 DB Update?? 아니면 내부 함수 있지
             await user.save();
 
             // Return jsonwebtoken
@@ -67,6 +68,7 @@ router.post(
                     id: user.id,
                 },
             };
+            // 여기 다시!!
             jwt.sign(
                 payload,
                 config.jwtSecret,

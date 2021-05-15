@@ -38,9 +38,11 @@ router.get("/user/:user_id", async (req, res) => {
       user: req.params.user_id,
     }).populate("user", ["name", "avatar"]);
 
+    // null 일 때
     if (!profile) return res.status(400).json({ msg: "Profile not found" });
     res.json(profile);
   } catch (error) {
+    // 어떤 경우에 에러가 발생하는지?
     console.error(error.message);
     if (error.kind == "ObjectId") {
       return res.status(400).json({ msg: "Profile not found" });
@@ -161,6 +163,7 @@ router.post(
         // Update
         profile = await Profile.findOneAndUpdate(
           { user: user.id },
+          // 아래 코드 뭐예요?
           { $set: { value: profileFields } },
           { new: true }
         );
