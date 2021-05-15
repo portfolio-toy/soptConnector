@@ -5,7 +5,7 @@ import auth from "../middleware/auth";
 import User from "../models/User";
 import Post from "../models/Post";
 
-import IComment from "../interfaces/IComment";
+import {IComment} from "../interfaces/IComment";
 
 const router = Router();
 
