@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import request from "request";
-import { check, validationResult } from "express-validator";
+import { check, validationResult } from "express-validator"; //유효성 검사
 import config from "../config";
 
 import auth from "../middlewares/auth";
@@ -8,6 +8,13 @@ import Profile from "../models/Profile";
 import { IProfileInputDTO } from "../interfaces/IProfile";
 
 const router = Router();
+// router는 url을 만들어줌 실제 주소는 아니고 클라이언트가 요청하는 주소!
+
+// 생성할거면 post(데이터를 body에 남김 -> 좀 더 안전)
+// 조회(read)는 get, get은 쿼리로 넣어 어떤 값을 넣어주는지 보임!
+// 업데이트는 put, patch 근데 대부분 put으로!
+// 삭제는 delete
+// 500이면 db에러, 404는 그냥 없는 것
 
 /**
  *  @route GET api/profile
@@ -152,6 +159,7 @@ router.post(
 
     try {
       let profile = await Profile.findOne({ user: user.id });
+      //원래 있었는지 찾음
 
       if (profile) {
         // Update
@@ -161,7 +169,7 @@ router.post(
           { new: true }
         );
 
-        return res.json(profile);
+        return res.json(profile); //클라에 res로 준다
       }
 
       // Create
@@ -232,7 +240,7 @@ router.put(
  */
 router.put(
   "/education",
-  auth,
+  auth, //private이기때문에 미들웨어인 auth 두번째 인자 원래 request, responce 사이에 온다
   [
     check("school", "School is required").not().isEmpty(),
     check("degree", "Degree is required").not().isEmpty(),

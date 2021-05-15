@@ -113,7 +113,4 @@ const ProfileSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model<IProfile & mongoose.Document>(
-  "Profile",
-  ProfileSchema
-);
+export default mongoose.model<IProfile & mongoose.Document>("Profile", ProfileSchema);

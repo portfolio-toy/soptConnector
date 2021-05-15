@@ -1,3 +1,5 @@
+// 회원가입
+
 import express, { Request, Response } from "express";
 import gravatar from "gravatar";
 import jwt from "jsonwebtoken";

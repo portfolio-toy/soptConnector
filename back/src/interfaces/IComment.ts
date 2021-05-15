@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IComment {
-  _id?: string; //얜 뭘까?
+  _id?: string; // key값이라서 string으로!
   user: mongoose.Types.ObjectId;
   text: string;
   name: string;

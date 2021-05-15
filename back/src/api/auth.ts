@@ -50,7 +50,7 @@ router.post(
           id: user.id,
         },
       };
-      jwt.sign(
+      jwt.sign( //토큰발급
         payload,
         config.jwtSecret,
         { expiresIn: 36000 },
@@ -70,7 +70,7 @@ router.post(
  *  @route GET api/auth
  *  @desc Test Route
  *  @access Public
- */
+ */ //미들웨어 테스트..?
 router.get("/", auth, async function (req: Request, res: Response) {
   try {
     const user = await User.findById(req.body.user.id).select("-password");
