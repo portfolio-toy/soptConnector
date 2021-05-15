@@ -4,10 +4,9 @@ import bcrypt from "bcryptjs";
 import config from "../config";
 import { check, validationResult } from "express-validator";
 import auth from "../middleware/auth";
+import User from "../models/User";
 
 const router = express.Router();
-
-import User from "../models/User";
 
 /**
  *  @route Post api/auth
@@ -66,21 +65,21 @@ router.post(
   }
 );
 
-module.exports = router;
-
 /*
  *  @route GET api/auth
  *  @desc Test Route
  *  @access Public
  */
 router.get("/", auth, async function (req, res) {
-    try {
-      console.log(req.body.user.id);
-      const user = await User.findById(req.body.user.id).select("-password");
-      res.json(user);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Err");
-    }
-  });
-  
+  try {
+    console.log(req.body.user.id);
+    const user = await User.findById(req.body.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Err");
+  }
+});
+
+
+module.exports = router;
