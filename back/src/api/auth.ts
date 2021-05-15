@@ -22,47 +22,50 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    if(!errors.isEmpty()){
+      return res.status(400).json({errors:errors.array()});
     }
     const { email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({email});
 
-      if (!user) {
+      if(!user){
         res.status(400).json({
-          errors: [{ msg: "Invalid Credentials" }],
+          errors:[{msg:"Invalid Credentials"}],
         });
       }
-      // Encrpyt password
+
+      // ecnrypt password
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
+      if(!isMatch){
         res.status(400).json({
-          errors: [{ msg: "Invalid Credentials" }],
+          errors:[{msg:"Invalid Credentials"}],
         });
       }
       await user.save();
 
-      // Return jsonwebtoken
+      // Return JWT
       const payload = {
-        user: {
-          id: user.id,
+        user:{
+          id:user.id,
         },
       };
+
       jwt.sign(
         payload,
         config.jwtSecret,
-        { expiresIn: 36000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
+        {expiresIn : 36000},
+        (err, token)=>{
+          if(err) throw err;
+          res.json({token});
         }
       );
-    } catch (err) {
+    }catch(err){
       console.error(err.message);
       res.status(500).send("Server Error");
     }
+
   }
 );
 
@@ -72,12 +75,13 @@ router.post(
  *  @access Public
  */
 router.get("/", auth, async function (req: Request, res: Response) {
-  try {
+  try{
+    console.log(req.body.user);
     const user = await User.findById(req.body.user.id).select("-password");
     res.json(user);
-  } catch (err) {
+  }catch(err){
     console.error(err.message);
-    res.status(500).send("Server Err");
+    res.status(500).send("Server error");
   }
 });
 
