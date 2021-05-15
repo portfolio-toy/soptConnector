@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node src",
     "build": "tsc && node dist",
-    "test" : "nodemon"
+    "test": "nodemon"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -16,7 +16,8 @@
     "gravatar": "^1.8.1",
     "js": "^0.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.3"
+    "mongoose": "^5.12.3",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
