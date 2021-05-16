@@ -4,6 +4,7 @@ import {check, validationResult} from "express-validator";
 import auth from "../middlewares/auth";
 import User from "../models/User";
 import Post from "../models/Post";
+import request from "request";
 
 const router = Router();
 
@@ -39,5 +40,22 @@ router.post(
     }
   }
 );
+
+/**
+ *  @route GET api/posts
+ *  @desc Get all posts
+ *  @access Private
+ */
+router.get("/",
+auth,
+async (req: Request, res: Response) => {
+  try {
+    const posts = await Post.find().sort({date: -1}); // post에서 찾아서 날짜순으로 정렬 -1은 내림차순: 최신순
+    res.json(posts);
+  } catch(error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
