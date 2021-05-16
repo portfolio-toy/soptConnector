@@ -46,7 +46,7 @@ router.post(
  *  @desc Get all posts
  *  @access Private
  */
-//전체게시물 조회
+//전체게시물 조회 -> 왜 안될까유
  router.get("/",
  auth,
  async (req: Request, res: Response) => {
