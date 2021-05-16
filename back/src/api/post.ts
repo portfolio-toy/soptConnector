@@ -1,10 +1,11 @@
-import {Router, Request, Response} from "express";
-import {check, validationResult} from "express-validator";
+import { Router, Request, Response } from "express";
+import { check, validationResult } from "express-validator";
 
 import auth from "../middlewares/auth";
 import User from "../models/User";
 import Post from "../models/Post";
-import request, { post } from "request";
+
+import {IComment} from "../interfaces/IComment";
 
 const router = Router();
 
@@ -16,10 +17,10 @@ const router = Router();
 router.post(
   "/",
   auth,
-  [check("text", "Text is request is required").not().isEmpty()],
+  [check("text", "Text is required").not().isEmpty()],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()) { //이 부분도 catch문에 넣기 가능! 대신 server error전에 넣는게 낫나?? -> 질문
+    if (!errors.isEmpty()) { //catch에 넣을 수 있음 근데 server error 전에 넣는 것이 나은가? -> 질문
       return res.status(400).json({ errors: errors.array() });
     }
     const { text } = req.body;
@@ -32,9 +33,9 @@ router.post(
         user: user.id,
       });
       const post = await newPost.save();
-      
+
       res.json(post);
-    } catch(error) {
+    } catch (error) {
       console.error(error.message);
       res.status(500).send("Server Error");
     }
@@ -46,10 +47,8 @@ router.post(
  *  @desc Get all posts
  *  @access Private
  */
-//전체게시물 조회 -> 왜 안될까유
- router.get("/",
- auth,
- async (req: Request, res: Response) => {
+// 전체 게시물 조회
+router.get("/", auth, async (req: Request, res: Response) => {
   try {
     const posts = await Post.find().sort({ date: -1 });
     res.json(posts);
