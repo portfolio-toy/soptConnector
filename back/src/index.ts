@@ -11,6 +11,7 @@ app.use(express.json());
 app.use("/api/profile", require("./api/profile"));
 app.use("/api/users", require("./api/users"));
 app.use("/api/auth", require("./api/auth"));
+app.use("/api/post", require("./api/post"));
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -20,7 +21,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error"); //render이 뭘까..? 뭔가를 만들어..?
+  res.render("error"); // error를 렌더링해서 보내겠다
 });
 
 app
