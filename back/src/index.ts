@@ -5,19 +5,20 @@ import connectDB from "./Logger/db"; //데베에 붙여주는 것
 // Connect Database
 connectDB();
 
+app.use(express.urlencoded());
 app.use(express.json());
 
 // Define Routes
-app.use("/api/profile", require("./api/profile"));
 app.use("/api/users", require("./api/users"));
+app.use("/api/profile", require("./api/profile"));
+app.use("/api/posts", require("./api/post"));
 app.use("/api/auth", require("./api/auth"));
-app.use("/api/post", require("./api/post"));
 
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "production" ? err : {}; //여기가 무슨 뜻일까?.....?.....
+  res.locals.error = req.app.get("env") === "production" ? err : {}; //여기가 무슨 뜻일까?.....?..... 질문
 
   // render the error page
   res.status(err.status || 500);

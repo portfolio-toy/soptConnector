@@ -5,8 +5,6 @@ import auth from "../middlewares/auth";
 import User from "../models/User";
 import Post from "../models/Post";
 
-import {IComment} from "../interfaces/IComment";
-
 const router = Router();
 
 /**
@@ -20,7 +18,7 @@ router.post(
   [check("text", "Text is required").not().isEmpty()],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) { //catch에 넣을 수 있음 근데 server error 전에 넣는 것이 나은가? -> 질문
+    if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
     const { text } = req.body;
