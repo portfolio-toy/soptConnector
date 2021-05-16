@@ -6,6 +6,7 @@ import config from "../config";
 import auth from "../middlewares/auth";
 import Profile from "../models/Profile";
 import { IProfileInputDTO } from "../interfaces/IProfile";
+import { error } from "node:console";
 
 const router = Router();
 // router는 url을 만들어줌 실제 주소는 아니고 클라이언트가 요청하는 주소!
@@ -41,7 +42,7 @@ router.get("/user/:user_id", async (req: Request, res: Response) => {
     const profile = await Profile.findOne({
       user: req.params.user_id,
     }).populate("user", ["name", "avatar"]);
-    if (!profile) return res.status(400).json({ msg: "Profile not found" });
+
     res.json(profile);
   } catch (error) {
     console.error(error.message);
@@ -72,7 +73,7 @@ router.get("/github/:username", (req: Request, res: Response) => {
         res.status(404).json({ msg: "No github profile found" });
       }
 
-      res.json(JSON.parse(body));
+      res.json(JSON.parse(body)); //parse는 string객체를 json객체로 변환시켜준다.
     });
   } catch (error) {
     console.error(error.message);
@@ -89,14 +90,14 @@ router.get("/me", auth, async (req: Request, res: Response) => {
   try {
     const profile = await Profile.findOne({
       user: req.body.user.id,
-    }).populate("user", ["name", "avatar"]);
+    }).populate("user", ["name", "avatar"]); //populate는 join과 같음
 
-    if (!profile) {
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind == "ObjectId") {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
-    res.json(profile);
-  } catch (err) {
-    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
@@ -176,8 +177,8 @@ router.post(
       profile = new Profile(profileFields);
       await profile.save();
       res.json(profile);
-    } catch (err) {
-      console.error(err.message);
+    } catch (error) {
+      console.error(error.message);
       status(500).send("Server Error.");
     }
   }
