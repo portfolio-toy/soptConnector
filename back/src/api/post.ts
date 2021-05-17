@@ -204,13 +204,14 @@ async(req: Request, res: Response) => {
  */
  router.delete("/comment/:id/:comment_id",
  auth,
- async (req, res) => {
+ async (req: Request, res: Response) => {
   try {
     const post = await Post.findById(req.params.id);
-    const comment = post.comments.find(comment => comment._id === req.params.comment_id);
+    //const comment = post.comments.find(comment => comment._id === req.params.comment_id); //오류나는 코드
+    const comment = post.comments.filter(comment => comment._id.toString() === req.params.comment_id).length
 
-    if (!comment) {
-      return res.status(400).json({ msg: " Comment does not exist" });
+    if (comment === 0) {
+      return res.status(400).json({ msg: "Comment does not exist" });
     }
 
     if (comment.user.toString() !== req.body.user.id) {
