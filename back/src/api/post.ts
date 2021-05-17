@@ -87,9 +87,6 @@ router.get("/:id", auth, async (req: Request, res: Response) => {
 router.delete("/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (!post) {
-      return res.status(404).json({ msg: "Post not found" });
-    }
     if (post.user.toString() !== req.body.user.id) {
       return res.status(401).json({ msg: "User not Authorized" });
     }
@@ -172,28 +169,60 @@ async(req: Request, res: Response) => {
  *  @desc Comment a post
  *  @access Private
  */
-router.post("/commnet/:id",
-auth,
-[check("text", "Text is required").not().isEmpty()],
-async(req: Request, res: Response) => {
-  const errors = validationResult(req);
+ router.post(
+  "/comment/:id",
+  auth,
+  [check("text", "Text is required").not().isEmpty()],
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    try {
+      const user = await User.findById(req.body.user.id).select("-password");
+      const post = await Post.findById(req.params.id);
+      const newComment: IComment = {
+        text: req.body.text,
+        name: user.name,
+        avatar: user.avatar,
+        user: req.body.user.id,
+      };
+      post.comments.unshift(newComment);
+      await post.save();
+      res.json(post.comments);
+    } catch (error) {
+      console.error(error.message);
+      if(error.kind === "Objectid") {
+        return res.status(400).json({ errors: errors.array() });
+      }
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+/**
+ *  @route DELETE api/posts/comment/:id/:comment_id
+ *  @desc Delete comment
+ *  @access Private
+ */
+ router.delete("/comment/:id/:comment_id",
+ auth,
+ async (req, res) => {
   try {
-    const user = await User.findById(req.body.user.id).select("-password");
     const post = await Post.findById(req.params.id);
-    const newComment: IComment = {
-      text: req.body.test,
-      name: user.name,
-      avatar: user.avatar,
-      user: req.body.user.id,
-    };
-    post.comments.unshift(newComment);
+    const comment = post.comments.find(comment => comment._id === req.params.comment_id);
+
+    if (!comment) {
+      return res.status(400).json({ msg: " Comment does not exist" });
+    }
+
+    if (comment.user.toString() !== req.body.user.id) {
+      return res.status(401).json({ msg: "User not Authorized" });
+    }
+    const removeIndex = post.comments.map(comment => comment.user.toString()).indexOf(req.body.user.id);
+
+    post.comments.splice(removeIndex, 1);
     await post.save();
     res.json(post.comments);
   } catch (error) {
     console.error(error.message);
-    if (error.kind === "ObjectId") {
-      res.status(404).json({ errors: errors.array() });
-    }
     res.status(500).send("Server Error");
   }
 });
