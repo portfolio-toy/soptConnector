@@ -202,22 +202,23 @@ async(req: Request, res: Response) => {
  *  @desc Delete comment
  *  @access Private
  */
- router.delete("/comment/:id/:comment_id", // id는 게시물 쓴 유저, comment_id는 댓글 단 유저
- auth,
- async (req: Request, res: Response) => {
+ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    //const comment = post.comments.find(comment => comment._id === req.params.comment_id); //오류나는 코드
-    const comment = post.comments.filter(comment => comment._id.toString() === req.params.comment_id)
-    
-    if (comment.length === 0) {
-      return res.status(400).json({ msg: "Comment does not exist" });
+    const comment = post.comments.find(
+      comment => comment._id.toString() === req.params.comment_id
+    );
+
+    if (!comment) {
+      return res.status(400).json({ msg: " Comment does not exist" });
     }
 
-    if (comment[0]._id != req.params.comment_id) { // != 하면 삭제되는데 !== 하면 삭제 안됨 -> 둘다 string인데 왜? 질문!
+    if (comment.user.toString() !== req.body.user.id) {
       return res.status(401).json({ msg: "User not Authorized" });
     }
-    const removeIndex = post.comments.map(comment => comment.user.toString()).indexOf(req.body.user.id);
+    const removeIndex = post.comments
+      .map((comment) => comment.user.toString())
+      .indexOf(req.body.user.id);
 
     post.comments.splice(removeIndex, 1);
     await post.save();
