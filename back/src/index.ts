@@ -18,7 +18,9 @@ app.use("/api/auth", require("./api/auth"));
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "production" ? err : {}; //여기가 무슨 뜻일까?.....?..... 질문
+  res.locals.error = req.app.get("env") === "production" ? err : {};
+  //클라이언트의 환경이 production이면 locals에 error를 세팅하겠다는 뜻
+  //환경변수는 보통 development(개발), testing(테스트), staging(상용 테스트), production(상용)
 
   // render the error page
   res.status(err.status || 500);

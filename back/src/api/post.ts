@@ -66,9 +66,6 @@ router.get("/:id", auth, async (req: Request, res: Response) => {
   try {
     const post = await Post.findById(req.params.id); // 여기 req.params.id에는 url경로에 있는 :id 값이 들어옴.
 
-    if (!post) {
-      return res.status(404).json({ msg: "Post not found" });
-    }
     res.json(post);
   } catch (error) {
     console.error(error.message);
@@ -142,11 +139,10 @@ auth,
 async(req: Request, res: Response) => {
   try {
     const post = await Post.findById(req.params.id);
-
     if (
       post.likes.filter(like => like.user.toString() === req.body.user.id).length === 0
       // filter함수는 인자로 제공되는 함수에 의해 test를 통과한 모든 요소를 새로운 array로 만든다
-      // 해당 게시물의 like유저와 req.body~를 비교 req.body~가 _id값, 즉 string이기 때문에 like.user도 toString해줌
+      // 해당 게시물의 like유저와 req.body~를 비교 req.body~가 string이기 때문에 like.user도 toString해줌
       ) {
       return res.status(400).json({ msg: "Post has not yet been liked"});
     }
@@ -202,23 +198,21 @@ async(req: Request, res: Response) => {
  *  @desc Delete comment
  *  @access Private
  */
- router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
+ router.delete("/comment/:id/:comment_id", // id는 게시물 쓴 유저, comment_id는 댓글 단 유저
+ auth,
+ async (req: Request, res: Response) => {
   try {
     const post = await Post.findById(req.params.id);
-    const comment = post.comments.find(
-      comment => comment._id.toString() === req.params.comment_id
-    );
+    const comment = post.comments.filter(comment => comment._id.toString() === req.params.comment_id)
 
-    if (!comment) {
-      return res.status(400).json({ msg: " Comment does not exist" });
+    if (comment.length === 0) {
+      return res.status(400).json({ msg: "Comment does not exist" });
     }
 
-    if (comment.user.toString() !== req.body.user.id) {
+    if (comment[0]._id.toString() !== req.params.comment_id) { 
       return res.status(401).json({ msg: "User not Authorized" });
     }
-    const removeIndex = post.comments
-      .map((comment) => comment.user.toString())
-      .indexOf(req.body.user.id);
+    const removeIndex = post.comments.map(comment => comment.user.toString()).indexOf(req.body.user.id);
 
     post.comments.splice(removeIndex, 1);
     await post.save();
