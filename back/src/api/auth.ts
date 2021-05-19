@@ -42,7 +42,6 @@ router.post(
           errors: [{ msg: "Invalid Credentials" }],
         });
       }
-      await user.save();
 
       // Return jsonwebtoken
       const payload = {
