@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IComment {
-  _id?: string;
+  _id?: mongoose.Types.ObjectId;
   user: mongoose.Types.ObjectId;
   text: string;
   name: string;
