@@ -6,5 +6,5 @@ export interface IComment {
   text: string;
   name: string;
   avatar: string;
-  date: Date;
+  date?: Date;
 }
