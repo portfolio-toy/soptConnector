@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
-
 export interface IComment {
-  _id?: string;
-  user: mongoose.Types.ObjectId;
+  id?: string;
+  user: string;
   text: string;
   name: string;
   avatar: string;

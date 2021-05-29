@@ -5,6 +5,8 @@ import auth from "../middleware/auth";
 import User from "../models/User";
 import Post from "../models/Post";
 import { IComment } from "../interfaces/IComment";
+import postService from "../service/postService";
+import CommentDTO from "../dto/CommentDTO";
 
 const router = express.Router();
 
@@ -195,23 +197,30 @@ router.post(
     if (!errors.isEmpty) {
       return res.status(400).json({ errors: errors.array() });
     }
-    try {
-      const user = await User.findById(req.body.user.id).select("-password");
-      const post = await Post.findById(req.params.id);
-      const newComment: IComment = {
-        text: req.body.text,
-        name: user.name,
-        avatar: user.avatar,
-        user: req.body.user.id,
-    };
-
-      post.comments.unshift(newComment);
-      await post.save();
-      res.json(post.comments);
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send("Server Error");
+    const dto: CommentDTO = {
+      postId: req.params.id,
+      userId: req.body.user.id,
+      text: req.body.text
     }
+    const result = await postService.comment(dto);
+    res.json(result);
+    // try {
+    //   const user = await User.findById(req.body.user.id).select("-password"); -> req.body.user.id: 미들웨어에서 토큰 디코딩을 통해 얻어온 userId
+    //   const post = await Post.findById(req.params.id); -> req.params.id: req.params(string)에서 받아온 게시글 id
+    //   const newComment: IComment = {
+    //     text: req.body.text, -> 
+    //     name: user.name,
+    //     avatar: user.avatar,
+    //     user: req.body.user.id,
+    // };
+
+    //   post.comments.unshift(newComment);
+    //   await post.save();
+    //   res.json(post.comments);
+    // } catch (error) {
+    //   console.error(error.message);
+    //   res.status(500).send("Server Error");
+    // }
 });
 
 /**
