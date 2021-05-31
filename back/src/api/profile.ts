@@ -52,7 +52,10 @@ router.get("/user/:user_id", async (req: Request, res: Response) => {
  *  @desc Get user repos from github
  *  @access Public
  */
-router.get("/github/:username", (req: Request, res: Response) => {});
+router.get("/github/:username", (req: Request, res: Response) => {
+
+  
+});
 
 /**
  *  @route GET api/profile/me
