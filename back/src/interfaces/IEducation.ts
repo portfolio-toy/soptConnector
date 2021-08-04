@@ -1,3 +1,4 @@
+//interface
 export interface IEducation {
   school: string;
   degree: string;

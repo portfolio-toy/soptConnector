@@ -1,3 +1,4 @@
+//interface
 export interface IExperience {
   title: string;
   company: string;

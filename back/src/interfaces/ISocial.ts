@@ -1,3 +1,4 @@
+//interface
 export interface ISocial {
   youtube: String;
   twitter: String;

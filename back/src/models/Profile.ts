@@ -1,3 +1,4 @@
+// model
 import mongoose from "mongoose";
 import { IProfile } from "../interfaces/IProfile";
 

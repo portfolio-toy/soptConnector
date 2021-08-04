@@ -1,3 +1,4 @@
+//interface
 import mongoose from "mongoose";
 import { IComment } from "./IComment";
 import { ILike } from "./ILike";

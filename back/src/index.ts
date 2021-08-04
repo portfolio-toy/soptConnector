@@ -1,3 +1,5 @@
+// routes 역할
+
 import express from "express";
 const app = express();
 import connectDB from "./Logger/db";

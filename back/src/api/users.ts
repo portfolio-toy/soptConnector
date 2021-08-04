@@ -14,6 +14,7 @@ import User from "../models/User";
  *  @desc Register User
  *  @access Public
  */
+
 router.post(
   "/",
   [

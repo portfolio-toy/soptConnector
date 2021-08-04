@@ -1,3 +1,4 @@
+//interface
 import mongoose from "mongoose";
 import { IExperience } from "./IExperience";
 import { IEducation } from "./IEducation";

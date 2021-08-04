@@ -1,3 +1,4 @@
+// model
 import mongoose from "mongoose";
 import { IPost } from "../interfaces/IPost";
 

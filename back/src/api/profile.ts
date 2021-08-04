@@ -13,6 +13,7 @@ const router = express.Router();
  *  @desc Get all profiles
  *  @access Public
  */
+
 router.get("/", async (req, res) => {
   try {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
