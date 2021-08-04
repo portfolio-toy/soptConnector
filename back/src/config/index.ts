@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-
+// config file
 // Set the NODE_ENV to 'development' by default
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
@@ -26,4 +26,10 @@ export default {
    */
   jwtSecret: process.env.JWT_SECRET,
   jwtAlgorithm: process.env.JWT_ALGO,
+
+  /**
+   * Your secret sauce
+   */
+  githubClientId: process.env.GITHUB_CLIENT_ID,
+  githubSecret: process.env.GITHUB_SECRET,
 };
